@@ -3,6 +3,7 @@
 from collections.abc import Iterator
 
 import pytest
+from alembic import command
 from fastapi.testclient import TestClient
 from sqlalchemy import Engine
 from sqlalchemy.orm import Session
@@ -11,11 +12,17 @@ from app.api.deps import get_db
 from app.core.config import get_settings
 from app.core.db import make_engine
 from app.main import create_app
+from tests.migrations import alembic_config
 
 
 @pytest.fixture(scope="session")
 def engine() -> Iterator[Engine]:
+    """Test DB engine. The schema is built by the real Alembic migrations
+    (not metadata.create_all), so every test run also tests the migrations.
+    """
     engine = make_engine(get_settings().test_database_url)
+    with engine.begin() as connection:
+        command.upgrade(alembic_config(connection), "head")
     yield engine
     engine.dispose()
 
