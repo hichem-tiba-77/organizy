@@ -1,0 +1,52 @@
+[project]
+name = "organizy-backend"
+version = "0.1.0"
+description = "Organizy API (FastAPI + PostgreSQL)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi[standard]>=0.165.0",
+    "psycopg[binary]>=3.3.9",
+    "pydantic-settings>=2.16.3",
+    "sqlalchemy>=2.1.9",
+    "tzdata>=2026.6",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.10.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.6",
+]
+
+# --- Ruff: linter (black owns formatting) ---
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes
+  "I",   # isort (import order)
+  "B",   # bugbear
+  "UP",  # pyupgrade
+  "SIM", # simplify
+  "DTZ", # naive datetimes: forces "today"/"now" through app.core.clock
+]
+ignore = ["E501"] # line length is black's job
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI's Depends()/Query() defaults are fine.
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Path"]
+
+# --- Black: formatter ---
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+# --- Pytest ---
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers"
