@@ -54,6 +54,7 @@ Single-user personal productivity app (only me): spaces → departments → task
 ## Workflow
 - I'm learning Claude Code: briefly explain each decision and name the Claude Code feature we're using.
 - One feature per branch, small Conventional Commits (`feat(tasks): ...`). Show me the diff before committing.
+- After committing: push, open the PR and merge it yourself (squash, delete the branch), then switch to `main` and pull. Don't ask or tell me first. Only merge when tests and lint pass (and CI is green, once CI exists).
 - Write failing tests first for business rules, then implement.
 - Stop at the end of each phase (and each feature) so I can test. End each phase with a recap: "Claude Code features used" + one tip.
 - Ask before adding a dependency or changing the stack.

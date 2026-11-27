@@ -73,7 +73,9 @@
       "PowerShell(gh pr view *)",
       "PowerShell(gh pr checks *)",
       "PowerShell(gh run view *)",
-      "PowerShell(gh run list *)"
+      "PowerShell(gh run list *)",
+      "Bash(gh pr merge *)",
+      "PowerShell(gh pr merge *)"
     ],
     "ask": [
       "Bash(git commit *)",
@@ -87,7 +89,6 @@
       "Bash(docker compose down *)",
       "Bash(docker volume *)",
       "Bash(gh pr create *)",
-      "Bash(gh pr merge *)",
       "Bash(gh repo *)",
       "PowerShell(git commit *)",
       "PowerShell(git push *)",
@@ -100,7 +101,6 @@
       "PowerShell(docker compose down *)",
       "PowerShell(docker volume *)",
       "PowerShell(gh pr create *)",
-      "PowerShell(gh pr merge *)",
       "PowerShell(gh repo *)"
     ],
     "deny": [
