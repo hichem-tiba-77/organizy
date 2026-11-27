@@ -75,11 +75,15 @@
       "PowerShell(gh run view *)",
       "PowerShell(gh run list *)",
       "Bash(gh pr merge *)",
-      "PowerShell(gh pr merge *)"
-    ],
-    "ask": [
+      "PowerShell(gh pr merge *)",
       "Bash(git commit *)",
       "Bash(git push *)",
+      "Bash(gh pr create *)",
+      "PowerShell(git commit *)",
+      "PowerShell(git push *)",
+      "PowerShell(gh pr create *)"
+    ],
+    "ask": [
       "Bash(git merge *)",
       "Bash(git rebase *)",
       "Bash(uv add *)",
@@ -88,10 +92,7 @@
       "Bash(uv run alembic downgrade *)",
       "Bash(docker compose down *)",
       "Bash(docker volume *)",
-      "Bash(gh pr create *)",
       "Bash(gh repo *)",
-      "PowerShell(git commit *)",
-      "PowerShell(git push *)",
       "PowerShell(git merge *)",
       "PowerShell(git rebase *)",
       "PowerShell(uv add *)",
@@ -100,7 +101,6 @@
       "PowerShell(uv run alembic downgrade *)",
       "PowerShell(docker compose down *)",
       "PowerShell(docker volume *)",
-      "PowerShell(gh pr create *)",
       "PowerShell(gh repo *)"
     ],
     "deny": [
