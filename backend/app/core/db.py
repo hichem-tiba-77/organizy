@@ -21,14 +21,21 @@ class Base(DeclarativeBase):
     metadata = MetaData(naming_convention=NAMING_CONVENTION)
 
 
-def make_engine(url: str) -> Engine:
+def make_engine(url: str, connect_timeout: int = 5) -> Engine:
     # pool_pre_ping: transparently replaces connections dropped by a DB restart.
-    return create_engine(url, pool_pre_ping=True)
+    # connect_timeout (seconds, libpq minimum 2): without it, a stopped database
+    # makes requests (and /health) hang instead of failing fast.
+    return create_engine(
+        url,
+        pool_pre_ping=True,
+        connect_args={"connect_timeout": connect_timeout},
+    )
 
 
 @lru_cache
 def get_engine() -> Engine:
-    return make_engine(get_settings().database_url)
+    settings = get_settings()
+    return make_engine(settings.database_url, settings.db_connect_timeout)
 
 
 @lru_cache

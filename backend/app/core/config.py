@@ -24,6 +24,8 @@ class Settings(BaseSettings):
     test_database_url: str = (
         "postgresql+psycopg://organizy:organizy@127.0.0.1:5432/organizy_test"
     )
+    # Seconds to wait for a DB connection before failing (libpq minimum: 2).
+    db_connect_timeout: int = 5
 
     # Env var TZ (case-insensitive match). Must be a valid IANA zone name.
     tz: str = "Africa/Algiers"
