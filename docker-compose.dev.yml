@@ -1,0 +1,29 @@
+# Phase 1 dev stack: PostgreSQL only. The backend runs locally with `uv run`.
+# Start:  docker compose -f docker-compose.dev.yml up -d
+# Status: docker compose -f docker-compose.dev.yml ps   (look for "healthy")
+name: organizy-dev
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-organizy}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-organizy}
+      POSTGRES_DB: ${POSTGRES_DB:-organizy}
+    ports:
+      # Bound to localhost only: the dev DB is never reachable from the LAN.
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Runs once, on first start with an empty volume: creates organizy_test.
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  pgdata:
